@@ -101,7 +101,7 @@ func (s *Server) sendErrorResponse(w http.ResponseWriter, statusCode int, errorT
 	})
 }
 
-// Load UK public holidays for 2075 into memory
+// Load UK public holidays for 2075 or whatever year we pick into memory
 func (s *Server) loadPublicHolidays(yearStr string, countryCode string) error {
 	url := fmt.Sprintf("https://date.nager.at/api/v3/PublicHolidays/%s/%s", yearStr, countryCode)
 	log.Printf("Loading public holidays for %s in %s...", yearStr, countryCode)
@@ -151,7 +151,11 @@ func (s *Server) appointmentExists(visitDate time.Time) (bool, error) {
 	return count > 0, nil
 }
 
-// The appointment handler, which only gets called if you are trying to create a new appointment
+// The appointment handler,
+// really most of the conditional chaeck and validation,
+// which only gets called if you are trying to create a new appointment
+// although that's all you can do
+// A 'real' system would always have a page/endpoint to list all current appointments etc.
 func (s *Server) createAppointment(w http.ResponseWriter, r *http.Request) {
 
 	// Construct a fake "today" using Now() and the server year
