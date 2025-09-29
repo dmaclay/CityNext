@@ -152,7 +152,7 @@ func (s *Server) appointmentExists(visitDate time.Time) (bool, error) {
 }
 
 // The appointment handler,
-// really most of the conditional chaeck and validation,
+// really most of the conditional checks and validation,
 // which only gets called if you are trying to create a new appointment
 // although that's all you can do
 // A 'real' system would always have a page/endpoint to list all current appointments etc.
